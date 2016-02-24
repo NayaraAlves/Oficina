@@ -1,4 +1,6 @@
-﻿using System;
+﻿using OficinaCore.Business;
+using OficinaCore.Entities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -9,16 +11,26 @@ using System.Windows.Forms;
 
 namespace OficinaWin
 {
-  public partial class PrincipalMDI : Form
-  {
-    public PrincipalMDI()
+    public partial class PrincipalMDI : Form
     {
-      InitializeComponent();
-    }
+        public PrincipalMDI()
+        {
+            InitializeComponent();
 
-    private void sairToolStripMenuItem_Click(object sender, EventArgs e)
-    {
-      this.Close();
+            List<Cliente> lista = new ClienteBll().Pesquisar(new Cliente());
+        }
+
+        private void sairToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+
+        private void testeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormTeste form = new FormTeste();
+            form.MdiParent = this;
+            form.Show();
+        }
     }
-  }
 }

@@ -11,7 +11,8 @@
     <RootNamespace>OficinaWin</RootNamespace>
     <AssemblyName>OficinaWin</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
@@ -46,6 +47,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FormTeste.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormTeste.Designer.cs">
+      <DependentUpon>FormTeste.cs</DependentUpon>
+    </Compile>
     <Compile Include="PrincipalMDI.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -54,6 +61,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FormTeste.resx">
+      <DependentUpon>FormTeste.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PrincipalMDI.resx">
       <DependentUpon>PrincipalMDI.cs</DependentUpon>
     </EmbeddedResource>
@@ -65,7 +75,11 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
