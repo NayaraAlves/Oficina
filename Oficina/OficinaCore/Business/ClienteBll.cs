@@ -1,6 +1,7 @@
 ﻿using OficinaCore.DataAccess;
 using OficinaCore.Entities;
 using OficinaCore.Enums;
+using OficinaCore.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +18,7 @@ namespace OficinaCore.Business
 
         public void TesteException()
         {
-            throw new OficinaCore.Exceptions.OficinaCoreException(EnumOficinaCoreErro.USUARIO_INEXISTENTE_SCA);
+            throw new OficinaCoreException(EnumOficinaCoreErro.USUARIO_INEXISTENTE_SCA);
         }
     }
 }

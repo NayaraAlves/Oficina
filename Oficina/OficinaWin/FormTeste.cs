@@ -28,7 +28,7 @@ namespace OficinaWin
             }
             catch (OficinaCoreException oce)
             {
-                MessageBox.Show(oce.Message);
+                MessageBox.Show(oce.Message, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
     }
