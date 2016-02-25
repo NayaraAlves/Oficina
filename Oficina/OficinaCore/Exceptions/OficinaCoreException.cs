@@ -1,17 +1,12 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="OficinaCoreException.cs" company="">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using OficinaCore.Enums;
+using OficinaCore.Resources;
 
 namespace OficinaCore.Exceptions
 {
-  using System;
-  using System.Collections.Generic;
-  using System.Linq;
-  using System.Text;
-  using OficinaCore.Enums;
-  using OficinaCore.Resources;
 
   /// <summary>
   /// TODO: Update summary.

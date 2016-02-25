@@ -1,5 +1,6 @@
 ﻿using OficinaCore.Business;
 using OficinaCore.Entities;
+using OficinaCore.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,6 +18,18 @@ namespace OficinaWin
         {
             InitializeComponent();
             this.dataGridView1.DataSource = new ClienteBll().Pesquisar(new Cliente());
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                new ClienteBll().TesteException();
+            }
+            catch (OficinaCoreException oce)
+            {
+                MessageBox.Show(oce.Message);
+            }
         }
     }
 }

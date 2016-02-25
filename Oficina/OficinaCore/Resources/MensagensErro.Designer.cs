@@ -59,5 +59,14 @@ namespace OficinaCore.Resources {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Usuário/Senha inválido.
+        /// </summary>
+        internal static string SENHA_INVALIDA_SCSENHA_INVALIDA_SCA {
+            get {
+                return ResourceManager.GetString("SENHA_INVALIDA_SCSENHA_INVALIDA_SCA", resourceCulture);
+            }
+        }
     }
 }

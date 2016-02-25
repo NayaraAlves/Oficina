@@ -1,20 +1,16 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="EnumOficinaCoreErro.cs" company="">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
+﻿using System.ComponentModel;
 
 namespace OficinaCore.Enums
 {
-  using System;
-  using System.Collections.Generic;
-  using System.Linq;
-  using System.Text;
 
-  /// <summary>
-  /// TODO: Update summary.
-  /// </summary>
-  public enum EnumOficinaCoreErro
+    /// <summary>
+    /// TODO: Update summary.
+    /// </summary>
+    public enum EnumOficinaCoreErro
   {
-  }
+        [Description("Usuário/Senha inválido")]
+        USUARIO_INEXISTENTE_SCA = 0,
+        SENHA_INVALIDA_SCA = 1,
+        SITUACAO_INVALIDA_SCA = 2,
+    }
 }
