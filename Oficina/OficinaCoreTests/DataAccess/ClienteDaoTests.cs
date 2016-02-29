@@ -18,16 +18,35 @@ namespace OficinaCore.DataAccess.Tests
             ClienteDao clienteDao = new ClienteDao();
 
             clienteDao.GetTodosRegistros();
-            // Assert.Fail();
+            Assert.Fail();
         }
 
         [TestMethod()]
         public void Pesquisar()
         {
             ClienteDao clienteDao = new ClienteDao();
+            Cliente clientePesquisa = new Cliente() { nomeCliente = "Teste22", cpfCliente = "Teste22", telefonesCliente = "Teste22", enderecoCliente = "Teste22" };
 
-            List<Cliente> lista = clienteDao.Pesquisar(new Cliente());
+            List<Cliente> lista = clienteDao.Pesquisar(clientePesquisa);
             Debug.Write("Qtd Registros: " + lista.Count());
         }
+
+        [TestMethod()]
+        public void InserirCliente()
+        {
+            
+            Cliente clienteInsert = new Cliente() { nomeCliente = "Teste22", cpfCliente = "Teste22", telefonesCliente = "Teste22", enderecoCliente = "Teste22" } ;
+            // new ClienteDao().InserirCliente(clienteInsert);
+            Debug.Write("Id_ClienteInserido: " + new ClienteDao().InserirCliente(clienteInsert));
+        }
+
+
+        [TestMethod()]
+        public void AtualizaCliente()
+        {
+
+        }
+
+
     }
 }
