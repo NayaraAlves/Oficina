@@ -55,78 +55,130 @@ namespace OficinaCore.DataAccess
                 return cliente.idCliente;
             }
         }
-        
+
+        public Int64 AlterarCliente(Cliente clienteAlterado)
+        {
+            StringBuilder sql = new StringBuilder();
+
+            sql.AppendLine("UPDATE oficina.cliente");
+            sql.AppendLine("SET ");
+            sql.AppendLine("    nome_cliente = @nomeCliente ,");
+            sql.AppendLine("    cpf_cliente = @cpfCliente ,");
+            sql.AppendLine("    telefones_cliente = @telefonesCliente ,");
+            sql.AppendLine("    endereco_cliente = @enderecoCliente ");
+            sql.AppendLine("WHERE ");
+            sql.AppendLine("    id_cliente = @idCliente;");
+
+            Database db = DatabaseFactory.CreateDatabase("postgres");
+            using (DbCommand cmd = db.GetSqlStringCommand(sql.ToString()))
+            {
+                db.AddInParameter(cmd, "@nomeCliente", DbType.String, clienteAlterado.nomeCliente);
+                db.AddInParameter(cmd, "@cpfCliente", DbType.String, clienteAlterado.cpfCliente);
+                db.AddInParameter(cmd, "@telefonesCliente", DbType.String, clienteAlterado.telefonesCliente);
+                db.AddInParameter(cmd, "@enderecoCliente", DbType.String, clienteAlterado.enderecoCliente);
+                db.AddInParameter(cmd, "@idCliente", DbType.Int64, clienteAlterado.idCliente);
+                
+                using (IDataReader reader = db.ExecuteReader(cmd))
+                {
+                    if (reader.Read())
+                    {
+                        clienteAlterado.idCliente = long.Parse(reader[0].ToString());
+                    }
+                }
+
+                return clienteAlterado.idCliente;
+            }
+
+        }
+
+        public bool DeletarCliente(long idCliente)
+        {
+            StringBuilder sql = new StringBuilder();
+
+            sql.AppendLine("    DELETE FROM oficina.cliente ");
+            sql.AppendLine("    WHERE ");
+            sql.AppendLine("    id_cliente = "+ idCliente + ";");
+
+            Database db = DatabaseFactory.CreateDatabase("postgres");
+            DbCommand cmd = db.GetSqlStringCommand(sql.ToString());
+
+            using (IDataReader reader = db.ExecuteReader(cmd))
+            {
+                return true;
+            }
+            
+        }
+
         public List<Cliente> Pesquisar(Cliente criterioPesquisa)
         {
             List<Cliente> lista = new List<Cliente>();
             StringBuilder sql = new StringBuilder();
 
             sql.AppendLine(" SELECT ");
-            sql.AppendLine("    id_cliente," );
-            sql.AppendLine("    nome_cliente," );
+            sql.AppendLine("    id_cliente,");
+            sql.AppendLine("    nome_cliente,");
             sql.AppendLine("    cpf_cliente,");
-            sql.AppendLine("    telefones_cliente," );
+            sql.AppendLine("    telefones_cliente,");
             sql.AppendLine("    endereco_cliente");
             sql.AppendLine(" FROM ");
             sql.AppendLine("    oficina.cliente ");
             sql.AppendLine(" WHERE ");
 
-            if (!criterioPesquisa.idCliente.Equals(0))
+            if (!criterioPesquisa.idCliente.Equals(0) && !criterioPesquisa.idCliente.Equals(""))
             {
-                sql.AppendLine("   id_cliente = @idCliente AND " );
+                sql.AppendLine("   id_cliente = @idCliente AND ");
             }
 
-            if (!criterioPesquisa.nomeCliente.Equals(0))
+            if (!criterioPesquisa.nomeCliente.Equals(0) && !criterioPesquisa.nomeCliente.Equals(""))
             {
                 sql.AppendLine("    nome_cliente = @nomeCliente  AND ");
             }
 
-            if (!criterioPesquisa.cpfCliente.Equals(0))
+            if (!criterioPesquisa.cpfCliente.Equals(0) && !criterioPesquisa.cpfCliente.Equals(""))
             {
                 sql.AppendLine("    cpf_cliente = @cpfCliente AND ");
             }
 
-            if (!criterioPesquisa.telefonesCliente.Equals(0))
+            if (!criterioPesquisa.telefonesCliente.Equals(0) && !criterioPesquisa.telefonesCliente.Equals(""))
             {
                 sql.AppendLine("    telefones_cliente = @telefonesCliente AND ");
             }
 
-            if (!criterioPesquisa.enderecoCliente.Equals(0))
+            if (!criterioPesquisa.enderecoCliente.Equals(0) && !criterioPesquisa.enderecoCliente.Equals(""))
             {
                 sql.AppendLine("    endereco_cliente = @enderecoCliente AND ");
             }
 
             sql.AppendLine("    1 = 1 ");
 
-            //ConfigurationManager.ConnectionStrings["postgres"].ToString()
             Database db = DatabaseFactory.CreateDatabase("postgres");
             using (DbCommand cmd = db.GetSqlStringCommand(sql.ToString()))
             {
-                //if (!criterioPesquisa.idCliente.Equals(0))
-                //{
-                //    db.AddInParameter(cmd, "@idCliente", DbType.Int64, criterioPesquisa.idCliente);
-                //}
+                if (!criterioPesquisa.idCliente.Equals(0) && !criterioPesquisa.idCliente.Equals(""))
+                {
+                    db.AddInParameter(cmd, "@idCliente", DbType.Int64, criterioPesquisa.idCliente);
+                }
 
-                //if (!criterioPesquisa.nomeCliente.Equals(0))
-                //{
-                //    db.AddInParameter(cmd, "@idCliente", DbType.Int64, criterioPesquisa.nomeCliente);
-                //}
+                if (!criterioPesquisa.nomeCliente.Equals(0) && !criterioPesquisa.nomeCliente.Equals(""))
+                {
+                    db.AddInParameter(cmd, "@nomeCliente", DbType.String, criterioPesquisa.nomeCliente);
+                }
 
-                //if (!criterioPesquisa.cpfCliente.Equals(0))
-                //{
-                    
-                //}
+                if (!criterioPesquisa.cpfCliente.Equals(0) && !criterioPesquisa.cpfCliente.Equals(""))
+                {
+                    db.AddInParameter(cmd, "@cpfCliente", DbType.String, criterioPesquisa.cpfCliente);
+                }
 
-                //if (!criterioPesquisa.telefonesCliente.Equals(0))
-                //{
-                    
-                //}
+                if (!criterioPesquisa.telefonesCliente.Equals(0) && !criterioPesquisa.telefonesCliente.Equals(""))
+                {
+                    db.AddInParameter(cmd, "@telefonesCliente", DbType.String, criterioPesquisa.telefonesCliente);
+                }
 
-                //if (!criterioPesquisa.enderecoCliente.Equals(0))
-                //{
-                    
-                //}
-                
+                if (!criterioPesquisa.enderecoCliente.Equals(0) && !criterioPesquisa.enderecoCliente.Equals(""))
+                {
+                    db.AddInParameter(cmd, "@enderecoCliente", DbType.String, criterioPesquisa.enderecoCliente);
+                }
+
                 using (IDataReader reader = db.ExecuteReader(cmd))
                 {
                     lista = (List<Cliente>)CarregarListaEntidade<Cliente>(reader);
