@@ -3,7 +3,6 @@ using Npgsql;
 using OficinaCore.Entities;
 using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Data;
 using System.Data.Common;
 using System.Text;
@@ -129,22 +128,22 @@ namespace OficinaCore.DataAccess
                 sql.AppendLine("   id_cliente = @idCliente AND ");
             }
 
-            if (!criterioPesquisa.nomeCliente.Equals(0) && !criterioPesquisa.nomeCliente.Equals(""))
+            if (!string.IsNullOrEmpty(criterioPesquisa.nomeCliente) && !criterioPesquisa.nomeCliente.Equals(0))
             {
                 sql.AppendLine("    nome_cliente = @nomeCliente  AND ");
             }
-
-            if (!criterioPesquisa.cpfCliente.Equals(0) && !criterioPesquisa.cpfCliente.Equals(""))
+            
+            if (!string.IsNullOrEmpty(criterioPesquisa.cpfCliente) && !criterioPesquisa.cpfCliente.Equals(0))
             {
                 sql.AppendLine("    cpf_cliente = @cpfCliente AND ");
             }
 
-            if (!criterioPesquisa.telefonesCliente.Equals(0) && !criterioPesquisa.telefonesCliente.Equals(""))
+            if (!string.IsNullOrEmpty(criterioPesquisa.telefonesCliente) && !criterioPesquisa.telefonesCliente.Equals(0))
             {
                 sql.AppendLine("    telefones_cliente = @telefonesCliente AND ");
             }
 
-            if (!criterioPesquisa.enderecoCliente.Equals(0) && !criterioPesquisa.enderecoCliente.Equals(""))
+            if (!string.IsNullOrEmpty(criterioPesquisa.enderecoCliente) && !criterioPesquisa.enderecoCliente.Equals(0))
             {
                 sql.AppendLine("    endereco_cliente = @enderecoCliente AND ");
             }
@@ -159,22 +158,22 @@ namespace OficinaCore.DataAccess
                     db.AddInParameter(cmd, "@idCliente", DbType.Int64, criterioPesquisa.idCliente);
                 }
 
-                if (!criterioPesquisa.nomeCliente.Equals(0) && !criterioPesquisa.nomeCliente.Equals(""))
+                if (!string.IsNullOrEmpty(criterioPesquisa.nomeCliente) && !criterioPesquisa.nomeCliente.Equals(0))
                 {
                     db.AddInParameter(cmd, "@nomeCliente", DbType.String, criterioPesquisa.nomeCliente);
                 }
 
-                if (!criterioPesquisa.cpfCliente.Equals(0) && !criterioPesquisa.cpfCliente.Equals(""))
+                if (!string.IsNullOrEmpty(criterioPesquisa.cpfCliente) && !criterioPesquisa.cpfCliente.Equals(0))
                 {
                     db.AddInParameter(cmd, "@cpfCliente", DbType.String, criterioPesquisa.cpfCliente);
                 }
 
-                if (!criterioPesquisa.telefonesCliente.Equals(0) && !criterioPesquisa.telefonesCliente.Equals(""))
+                if (!string.IsNullOrEmpty(criterioPesquisa.telefonesCliente) && !criterioPesquisa.telefonesCliente.Equals(0))
                 {
                     db.AddInParameter(cmd, "@telefonesCliente", DbType.String, criterioPesquisa.telefonesCliente);
                 }
 
-                if (!criterioPesquisa.enderecoCliente.Equals(0) && !criterioPesquisa.enderecoCliente.Equals(""))
+                if (!string.IsNullOrEmpty(criterioPesquisa.enderecoCliente) && !criterioPesquisa.enderecoCliente.Equals(0))
                 {
                     db.AddInParameter(cmd, "@enderecoCliente", DbType.String, criterioPesquisa.enderecoCliente);
                 }
@@ -188,42 +187,5 @@ namespace OficinaCore.DataAccess
             return lista;
         }
 
-        ////Pega todos os registros
-        public DataTable GetTodosRegistros()
-        {
-            NpgsqlConnection pgsqlConnection = null;
-            DataTable dt = new DataTable();
-
-            try
-            {
-                // string connString = String.Format("Server=localhost;Port=5432;User Id=postgres;Password=BmqpzSULuf;Database=Oficina;");
-                string connString = "teste";
-                using (pgsqlConnection = new NpgsqlConnection(connString))
-                {
-                    // abre a conexão com o PgSQL e define a instrução SQL
-                    pgsqlConnection.Open();
-                    string cmdSeleciona = "Select * from oficina.cliente";
-
-                    using (NpgsqlDataAdapter Adpt = new NpgsqlDataAdapter(cmdSeleciona, pgsqlConnection))
-                    {
-                        Adpt.Fill(dt);
-                    }
-                }
-            }
-            catch (NpgsqlException ex)
-            {
-                throw ex;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-                pgsqlConnection.Close();
-            }
-
-            return dt;
-        }
     }
 }

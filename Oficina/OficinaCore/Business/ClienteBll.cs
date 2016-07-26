@@ -2,10 +2,7 @@
 using OficinaCore.Entities;
 using OficinaCore.Enums;
 using OficinaCore.Exceptions;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace OficinaCore.Business
 {

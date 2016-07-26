@@ -62,8 +62,10 @@
     <Compile Include="Business\ClienteBll.cs" />
     <Compile Include="DataAccess\AbstractDao.cs" />
     <Compile Include="DataAccess\ClienteDao.cs" />
+    <Compile Include="DataAccess\ProdutoDao.cs" />
     <Compile Include="Entities\Cliente.cs" />
     <Compile Include="Entities\MappingAttribute.cs" />
+    <Compile Include="Entities\Produto.cs" />
     <Compile Include="Enums\EnumOficinaCoreErro.cs" />
     <Compile Include="Exceptions\OficinaCoreException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

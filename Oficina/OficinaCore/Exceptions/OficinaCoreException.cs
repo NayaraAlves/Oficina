@@ -1,17 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using OficinaCore.Enums;
+﻿using OficinaCore.Enums;
 using OficinaCore.Resources;
+using System;
 
 namespace OficinaCore.Exceptions
 {
 
-  /// <summary>
-  /// TODO: Update summary.
-  /// </summary>
-  public class OficinaCoreException : System.Exception
+    /// <summary>
+    /// TODO: Update summary.
+    /// </summary>
+    public class OficinaCoreException : System.Exception
   {
     /// <summary>
         /// Construtor simples desta Exception.
